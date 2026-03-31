@@ -1,0 +1,6 @@
+name = "Mace"
+grammar = "mace"
+path_suffixes = ["mace"]
+line_comments = ["/="]
+tab_size = 2
+hard_tabs = false
