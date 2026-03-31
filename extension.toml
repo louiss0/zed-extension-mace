@@ -1,7 +1,11 @@
-id = "extension-template"
-name = "Extension Template"
+id = "mace"
+name = "Mace"
 version = "0.0.1"
 schema_version = 1
-authors = ["Example Author <example@example.com>"]
-description = "Template for a Zed extension."
-repository = "https://github.com/louiss0/zed-extension-template"
+authors = ["Shelton Louis <louisshelton0@gmail.com>"]
+description = "This is the official Mace extension for Zed."
+repository = "https://github.com/louiss0/zed-extension-mace"
+
+[grammars.mace]
+repository = "https://github.com/louiss0/tree-sitter-mace"
+rev = "a4d1d1cd7408b50363f722edab33db48e5095fb2"
