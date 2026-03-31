@@ -8,4 +8,4 @@ repository = "https://github.com/louiss0/zed-extension-mace"
 
 [grammars.mace]
 repository = "https://github.com/louiss0/tree-sitter-mace"
-rev = "a4d1d1cd7408b50363f722edab33db48e5095fb2"
+rev = "280e0ddb5fcb0df549cfc25ca90dc43a6e39c8a3"
