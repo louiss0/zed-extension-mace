@@ -1,0 +1,7 @@
+id = "extension-template"
+name = "Extension Template"
+version = "0.0.1"
+schema_version = 1
+authors = ["Example Author <example@example.com>"]
+description = "Template for a Zed extension."
+repository = "https://github.com/louiss0/zed-extension-template"
