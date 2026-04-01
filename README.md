@@ -1,15 +1,9 @@
-# Zed Extension Template
+# Mace Zed Extension
 
-This template uses placeholder author details because it is public.
-Run the script below to set your real credentials.
+This extension provides Mace language support for Zed, including the grammar,
+language server wiring, and editor snippets.
 
-## Setup
+## Snippets
 
-```bash
-./scripts/set-credentials.sh "Your Name" "you@example.com" 2024
-```
-
-## Notes
-
-- This template is designed to live under a zed-extensions parent so it works
-  with your sync script.
+Zed extension snippets live in the top-level `snippets/` directory as one JSON
+file per language scope. Mace snippets are defined in `snippets/mace.json`.
