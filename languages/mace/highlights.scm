@@ -5,6 +5,7 @@
   "schema"
   "output"
   "schema_file"
+  "enum"
 ] @keyword
 
 (injectable_modifier) @keyword.modifier
@@ -26,14 +27,36 @@
 (type_declaration
   (identifier) @type.definition)
 
+(enum_declaration
+  (identifier) @type.definition)
+
 (schema_declaration
   (identifier) @type.definition)
+
+(enum_member
+  (identifier) @constant)
 
 (import_declaration
   (identifier) @type)
 
 (named_type
   (identifier) @type)
+
+(variable_declaration
+  [
+    (string_type)
+    (int_type)
+    (float_type)
+    (boolean_type)
+  ] @type.builtin)
+
+(variable_declaration
+  (array_type
+    "array" @type.builtin))
+
+(variable_declaration
+  (named_type
+    (identifier) @type))
 
 (schema_directive
   (identifier) @type)
@@ -107,4 +130,6 @@
   "]"
   "{"
   "}"
+  "<"
+  ">"
 ] @punctuation.bracket
