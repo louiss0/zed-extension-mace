@@ -22,7 +22,11 @@
   (boolean_type)
 ] @type.builtin
 
-"array" @type.builtin
+[
+  "array"
+  "union"
+  "variant"
+] @type.builtin
 
 (type_declaration
   (identifier) @type.definition)
@@ -35,6 +39,10 @@
 
 (enum_member
   (identifier) @constant)
+
+(enum_member_access
+  enum: (identifier) @type
+  member: (identifier) @constant)
 
 (import_declaration
   (identifier) @type)
@@ -53,6 +61,13 @@
 (variable_declaration
   (array_type
     "array" @type.builtin))
+
+(variable_declaration
+  (union_type
+    [
+      "union"
+      "variant"
+    ] @type.builtin))
 
 (variable_declaration
   (named_type
