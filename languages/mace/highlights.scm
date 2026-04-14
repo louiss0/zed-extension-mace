@@ -3,9 +3,10 @@
   "import"
   "type"
   "schema"
+  "doc"
+  "enum"
   "output"
   "schema_file"
-  "enum"
 ] @keyword
 
 (injectable_modifier) @keyword.modifier
@@ -22,7 +23,11 @@
   (boolean_type)
 ] @type.builtin
 
-"array" @type.builtin
+[
+  "array"
+  "union"
+  "variant"
+] @type.builtin
 
 (type_declaration
   (identifier) @type.definition)
@@ -33,6 +38,16 @@
 (schema_declaration
   (identifier) @type.definition)
 
+(doc_declaration
+  "doc" @keyword
+  (identifier) @type.definition)
+
+[
+  "summary"
+  "description"
+  "props"
+] @property
+
 (enum_member
   (identifier) @constant)
 
@@ -41,22 +56,6 @@
 
 (named_type
   (identifier) @type)
-
-(variable_declaration
-  [
-    (string_type)
-    (int_type)
-    (float_type)
-    (boolean_type)
-  ] @type.builtin)
-
-(variable_declaration
-  (array_type
-    "array" @type.builtin))
-
-(variable_declaration
-  (named_type
-    (identifier) @type))
 
 (schema_directive
   (identifier) @type)
@@ -70,6 +69,14 @@
   (_)
   (identifier) @variable)
 
+(enum_member_access
+  enum: (identifier) @variable
+  member: (identifier) @property)
+
+(enum_member_access
+  enum: (enum_member_access)
+  member: (identifier) @property)
+
 [
   (schema_field)
   (output_field)
@@ -77,10 +84,26 @@
   (record_field)
 ] @property
 
+(prop_entry
+  (identifier) @property)
+
 (self_reference
   (identifier) @property)
 
-(string_literal) @string
+[
+  (string_literal)
+  (doc_block_string)
+  (inline_doc_block)
+] @string
+
+[
+  (inline_description)
+  (description_text)
+] @comment
+(interpolation
+  "$(" @punctuation.special
+  ")" @punctuation.special)
+
 (int_literal) @number
 (float_literal) @number.float
 (boolean_literal) @boolean
