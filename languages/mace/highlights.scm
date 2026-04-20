@@ -105,6 +105,10 @@
   (inline_description)
   (description_text)
 ] @comment
+
+(inline_description
+  "/#" @comment)
+
 (interpolation
   "$(" @punctuation.special
   ")" @punctuation.special)
