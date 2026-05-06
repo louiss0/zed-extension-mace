@@ -3,7 +3,9 @@
     "prefix": "mace-import",
     "description": "Insert a named Mace import declaration",
     "body": [
-      "from \"${1:./shared.mace}\" import ${2:Name};"
+      "|===|",
+      "from \"${1:./shared.mace}\" import ${2:Name};",
+      "|===|"
     ]
   },
   "Data output block": {
