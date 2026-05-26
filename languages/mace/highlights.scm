@@ -5,7 +5,6 @@
   "schema"
   "gen_doc"
   "schema_doc"
-  "enum"
   "output"
   "schema_file"
 ] @keyword
@@ -34,9 +33,6 @@
 (type_declaration
   (identifier) @type.definition)
 
-(enum_declaration
-  (identifier) @type.definition)
-
 (schema_declaration
   (identifier) @type.definition)
 
@@ -53,9 +49,6 @@
   "description"
   "props"
 ] @property
-
-(enum_member
-  (identifier) @constant)
 
 (import_declaration
   (identifier) @type)
