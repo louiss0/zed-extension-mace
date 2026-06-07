@@ -9,6 +9,6 @@
   (identifier) @name) @item
 
 (variable_declaration
-  (injectable_modifier)
+  (nullable_modifier)
   (_)
   (identifier) @name) @item
