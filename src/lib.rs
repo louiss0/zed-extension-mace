@@ -13,14 +13,12 @@ impl zed::Extension for MaceExtension {
         worktree: &zed::Worktree,
     ) -> zed::Result<zed::Command> {
         let command = worktree
-            .which("go")
-            .ok_or_else(|| "could not find `go` on PATH".to_string())?;
-
-        let package_path = format!("{}/cmd", worktree.root_path());
+            .which("mace")
+            .ok_or_else(|| "could not find `mace` on PATH".to_string())?;
 
         Ok(zed::Command {
             command,
-            args: vec!["run".to_string(), package_path, "lsp".to_string()],
+            args: vec!["lsp".to_string()],
             env: worktree.shell_env(),
         })
     }
