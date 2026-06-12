@@ -18,7 +18,7 @@ impl zed::Extension for MaceExtension {
 
         Ok(zed::Command {
             command: go,
-            args: vec!["run".to_string(), "cmd/root.go".to_string(), "lsp".to_string()],
+            args: vec!["run".to_string(), "./cmd".to_string(), "lsp".to_string()],
             env: worktree.shell_env(),
         })
     }
