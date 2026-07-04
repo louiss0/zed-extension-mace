@@ -8,7 +8,7 @@ repository = "https://github.com/louiss0/zed-extension-mace"
 
 [grammars.mace]
 repository = "https://github.com/louiss0/tree-sitter-mace"
-rev = "b5d15a60a5b7be2ca5807cd929a9ff2d3642e015"
+rev = "5674bb1fa5177b9690c44bd74b6e8e95f41b5158"
 
 [language_servers.mace]
 name = "Mace LSP"
