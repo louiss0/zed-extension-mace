@@ -4,6 +4,8 @@ use std::path::{Path, PathBuf};
 use zed_extension_api::serde_json;
 use zed_extension_api::{self as zed};
 
+const RELEASE_OWNER: &str = "louiss0";
+const RELEASE_REPOSITORY: &str = "mace";
 const VERSION_FILE: &str = "mace-version.json";
 const DOWNLOAD_DIR: &str = ".mace-bin";
 const BINARY_NAME: &str = if cfg!(windows) { "mace.exe" } else { "mace" };
@@ -21,7 +23,7 @@ impl ReleaseMetadata {
         let version = self.version.trim_start_matches('v');
 
         Ok(format!(
-            "https://github.com/louiss0/mace/releases/download/v{version}/mace_v{version}_{os}_{arch}.{extension}"
+            "https://github.com/{RELEASE_OWNER}/{RELEASE_REPOSITORY}/releases/download/v{version}/mace_v{version}_{os}_{arch}.{extension}"
         ))
     }
 }
@@ -36,7 +38,9 @@ impl zed::Extension for MaceExtension {
         language_server_id: &zed::LanguageServerId,
         worktree: &zed::Worktree,
     ) -> zed::Result<zed::Command> {
-        if let Some(binary_path) = find_downloaded_binary()? {
+        let metadata = read_release_metadata().ok();
+
+        if let Some(binary_path) = downloaded_binary_path(metadata.as_ref()) {
             return Ok(zed::Command {
                 command: binary_path.to_string_lossy().into_owned(),
                 args: Vec::new(),
@@ -44,14 +48,11 @@ impl zed::Extension for MaceExtension {
             });
         }
 
-        if extension_mode() == ExtensionMode::Development {
+        if metadata.is_none() {
             return go_language_server_command(worktree);
         }
 
-        let metadata = match read_release_metadata() {
-            Ok(metadata) => metadata,
-            Err(_) => return go_language_server_command(worktree),
-        };
+        let metadata = metadata.expect("metadata checked above");
         let binary_path = binary_path_for(&metadata.version);
 
         ensure_binary_ready(language_server_id, worktree, &metadata, &binary_path)?;
@@ -65,25 +66,23 @@ impl zed::Extension for MaceExtension {
 }
 
 fn read_release_metadata() -> zed::Result<ReleaseMetadata> {
-    let data = fs::read_to_string(version_file_path())
-        .map_err(|error| format!("failed to read {}: {error}", version_file_path().display()))?;
+    let data = fs::read_to_string(VERSION_FILE)
+        .map_err(|error| format!("failed to read {VERSION_FILE}: {error}"))?;
 
-    serde_json::from_str(&data)
-        .map_err(|error| format!("failed to parse {}: {error}", version_file_path().display()))
+    serde_json::from_str(&data).map_err(|error| format!("failed to parse {VERSION_FILE}: {error}"))
 }
 
-fn find_downloaded_binary() -> zed::Result<Option<PathBuf>> {
-    let metadata = match read_release_metadata() {
-        Ok(metadata) => metadata,
-        Err(_) => return Ok(None),
+fn downloaded_binary_path(metadata: Option<&ReleaseMetadata>) -> Option<PathBuf> {
+    let Some(metadata) = metadata else {
+        return None;
     };
 
     let binary_path = binary_path_for(&metadata.version);
-    Ok(binary_path.exists().then_some(binary_path))
+    binary_path.exists().then_some(binary_path)
 }
 
 fn binary_path_for(version: &str) -> PathBuf {
-    Path::new(&download_dir()).join(version).join(BINARY_NAME)
+    Path::new(DOWNLOAD_DIR).join(version).join(BINARY_NAME)
 }
 
 fn ensure_binary_ready(
@@ -176,31 +175,6 @@ fn current_platform_release_parts() -> zed::Result<(&'static str, &'static str, 
         (zed::Os::Windows, zed::Architecture::X8664) => Ok(("windows", "amd64", "zip")),
         _ => Err("unsupported platform for Mace release metadata".to_string()),
     }
-}
-
-#[derive(Clone, Copy, PartialEq, Eq)]
-enum ExtensionMode {
-    Development,
-    Production,
-}
-
-fn extension_mode() -> ExtensionMode {
-    match std::env::var("MACE_EXTENSION_MODE").as_deref() {
-        Ok("development") => ExtensionMode::Development,
-        _ => ExtensionMode::Production,
-    }
-}
-
-fn version_file_path() -> PathBuf {
-    std::env::var_os("MACE_EXTENSION_VERSION_FILE")
-        .map(PathBuf::from)
-        .unwrap_or_else(|| PathBuf::from(VERSION_FILE))
-}
-
-fn download_dir() -> PathBuf {
-    std::env::var_os("MACE_EXTENSION_DOWNLOAD_DIR")
-        .map(PathBuf::from)
-        .unwrap_or_else(|| PathBuf::from(DOWNLOAD_DIR))
 }
 
 zed::register_extension!(MaceExtension);
