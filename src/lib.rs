@@ -6,6 +6,7 @@ use zed_extension_api::{self as zed};
 
 const RELEASE_OWNER: &str = "louiss0";
 const RELEASE_REPOSITORY: &str = "mace";
+const DEVELOPMENT_ENV_FILE: &str = ".env.development";
 const VERSION_FILE: &str = "mace-version.json";
 const DOWNLOAD_DIR: &str = ".mace-bin";
 const BINARY_NAME: &str = if cfg!(windows) { "mace.exe" } else { "mace" };
@@ -38,6 +39,10 @@ impl zed::Extension for MaceExtension {
         language_server_id: &zed::LanguageServerId,
         worktree: &zed::Worktree,
     ) -> zed::Result<zed::Command> {
+        if is_development_mode() {
+            return go_language_server_command(worktree);
+        }
+
         let metadata = read_release_metadata().ok();
 
         if let Some(binary_path) = downloaded_binary_path(metadata.as_ref()) {
@@ -175,6 +180,20 @@ fn current_platform_release_parts() -> zed::Result<(&'static str, &'static str, 
         (zed::Os::Windows, zed::Architecture::X8664) => Ok(("windows", "amd64", "zip")),
         _ => Err("unsupported platform for Mace release metadata".to_string()),
     }
+}
+
+fn is_development_mode() -> bool {
+    let Ok(data) = fs::read_to_string(DEVELOPMENT_ENV_FILE) else {
+        return false;
+    };
+
+    data.lines().any(|line| {
+        let Some((key, value)) = line.split_once('=') else {
+            return false;
+        };
+
+        key.trim() == "MACE_EXTENSION_MODE" && value.trim() == "development"
+    })
 }
 
 zed::register_extension!(MaceExtension);

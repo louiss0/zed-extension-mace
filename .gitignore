@@ -1,3 +1,5 @@
 target/
 extension.wasm
 grammars/mace/
+.env
+.env.*
