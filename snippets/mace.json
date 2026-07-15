@@ -29,10 +29,10 @@
     ]
   },
   "Type declaration": {
-    "prefix": "mace-type",
-    "description": "Insert a Mace type declaration",
+    "prefix": "mace-alias",
+    "description": "Insert a Mace alias declaration",
     "body": [
-      "type ${1:Name} = ${2:string};"
+      "alias ${1:Name}: ${2:string};"
     ]
   },
   "Schema declaration": {
