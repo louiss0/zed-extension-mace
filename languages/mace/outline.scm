@@ -8,7 +8,3 @@
   (_)
   (identifier) @name) @item
 
-(variable_declaration
-  (nullable_modifier)
-  (_)
-  (identifier) @name) @item
