@@ -1,49 +1,58 @@
 {
   "Named import": {
-    "prefix": "mace-import",
+    "prefix": "mace:import",
     "description": "Insert a named Mace import declaration",
     "body": [
+      "from \"${1:./shared.mace}\" import ${2:Name};"
+    ]
+  },
+  "Script Block": {
+    "prefix": "mace:script",
+    "description": "Insert a Mace script block",
+    "body": [
       "|===|",
-      "from \"${1:./shared.mace}\" import ${2:Name};",
+      "${1:code}",
       "|===|"
     ]
   },
   "Data output block": {
-    "prefix": "mace-output-data",
-    "description": "Insert an output = data block",
+    "prefix": "mace:output-data",
+    "description": "Insert a data output block",
     "body": [
       "[output = data]",
       "{",
-      "  ${1:result}: ${2:value};",
+      "  ${1:result}: ${2:value},",
       "}"
     ]
   },
   "Schema output block": {
-    "prefix": "mace-output-schema",
-    "description": "Insert an output = schema block",
+    "prefix": "mace:output-schema",
+    "description": "Insert a schema output block",
     "body": [
       "[output = schema]",
       "{",
-      "  ${1:Name}: ${2:string};",
+      "  ${1:name}: ${2:string},",
       "}"
     ]
   },
   "Type declaration": {
-    "prefix": "mace-alias",
+    "prefix": "mace:alias",
     "description": "Insert a Mace alias declaration",
     "body": [
       "alias ${1:Name}: ${2:string};"
     ]
   },
   "Schema declaration": {
-    "prefix": "mace-schema",
+    "prefix": "mace:schema",
     "description": "Insert a Mace schema declaration",
     "body": [
-      "schema ${1:Name} = { ${2:field}: ${3:string}; };"
+      "schema ${1:Name}: {",
+      "  ${2:field}: ${3:string},",
+      "};"
     ]
   },
   "Typed variable declaration": {
-    "prefix": "mace-var",
+    "prefix": "mace:var",
     "description": "Insert a typed immutable Mace variable declaration",
     "body": [
       "${1:string} ${2:name} = ${3:\"value\"};"

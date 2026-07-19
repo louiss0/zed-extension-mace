@@ -5,6 +5,7 @@ schema_version = 1
 authors = ["Shelton Louis <louisshelton0@gmail.com>"]
 description = "This is the official Mace extension for Zed."
 repository = "https://github.com/louiss0/zed-extension-mace"
+snippets = ["./snippets/mace.json"]
 
 [grammars.mace]
 repository = "https://github.com/louiss0/tree-sitter-mace"

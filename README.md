@@ -11,4 +11,5 @@ downloads that release before starting the server.
 ## Snippets
 
 Zed extension snippets live in the top-level `snippets/` directory as one JSON
-file per language scope. Mace snippets are defined in `snippets/mace.json`.
+file per language scope. Mace snippets are defined in `snippets/mace.json` and
+registered through the `snippets` field in `extension.toml`.
