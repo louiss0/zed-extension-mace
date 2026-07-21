@@ -1,7 +1,6 @@
 [
   "from"
   "import"
-  "bind"
   "alias"
   "schema"
   "gen_doc"
@@ -52,7 +51,7 @@
 (import_declaration
   [
     "import"
-    "bind"
+    (bind_keyword)
   ] @keyword
   (identifier) @type)
 
