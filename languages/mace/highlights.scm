@@ -10,7 +10,6 @@
   "parse"
   "parse_file"
   "match"
-  "as"
 ] @keyword
 
 [
@@ -50,7 +49,10 @@
 ] @property
 
 (import_declaration
-  "import" @keyword
+  [
+    "import"
+    "bind"
+  ] @keyword
   (identifier) @type)
 
 (named_type
