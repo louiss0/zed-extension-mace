@@ -9,6 +9,7 @@
   "schema_file"
   "parse"
   "parse_file"
+  "doc"
   "match"
 ] @keyword
 
@@ -104,7 +105,6 @@
 [
   (string_literal)
   (doc_block_string)
-  (inline_doc_block)
 ] @string
 
 [
