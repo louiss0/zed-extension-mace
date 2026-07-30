@@ -48,7 +48,7 @@ impl zed::Extension for MaceExtension {
         if let Some(binary_path) = downloaded_binary_path(metadata.as_ref()) {
             return Ok(zed::Command {
                 command: binary_path.to_string_lossy().into_owned(),
-                args: Vec::new(),
+                args: vec!["lsp".to_string()],
                 env: worktree.shell_env(),
             });
         }
@@ -64,7 +64,7 @@ impl zed::Extension for MaceExtension {
 
         Ok(zed::Command {
             command: binary_path.to_string_lossy().into_owned(),
-            args: Vec::new(),
+            args: vec!["lsp".to_string()],
             env: worktree.shell_env(),
         })
     }
