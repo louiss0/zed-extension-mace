@@ -9,7 +9,6 @@
   "schema_file"
   "parse"
   "parse_file"
-  "doc"
   "match"
 ] @keyword
 
