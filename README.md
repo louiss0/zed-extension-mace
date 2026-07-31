@@ -1,7 +1,9 @@
 # Mace Zed Extension
 
 This extension provides Mace language support for Zed, including the grammar,
-language server wiring, and editor snippets.
+language server wiring, and editor snippets. Mace is a new deterministic,
+strongly typed configuration language created in 2026; this is its first stable
+Zed extension release.
 
 The language server prefers a downloaded Mace binary when one is already
 present in the extension cache. Otherwise it reads `mace-version.json` from the

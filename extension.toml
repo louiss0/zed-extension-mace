@@ -1,6 +1,6 @@
 id = "mace"
 name = "Mace"
-version = "0.0.2"
+version = "1.0.0"
 schema_version = 1
 authors = ["Shelton Louis <louisshelton0@gmail.com>"]
 description = "This is the official Mace extension for Zed."
@@ -9,7 +9,7 @@ snippets = ["./snippets/mace.json"]
 
 [grammars.mace]
 repository = "https://github.com/louiss0/tree-sitter-mace"
-rev = "91dfd89470b998c05ab9d0328023c9f1aa923cd8"
+rev = "059cbfd617bc195e1e8bf288cfc18f862a6f2d7e"
 
 [language_servers.mace]
 name = "Mace LSP"

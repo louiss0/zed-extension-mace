@@ -1,6 +1,6 @@
 [package]
-name = "my-extension"
-version = "0.0.1"
+name = "mace-extension"
+version = "1.0.0"
 edition = "2021"
 
 [lib]
