@@ -9,7 +9,7 @@ snippets = ["./snippets/mace.json"]
 
 [grammars.mace]
 repository = "https://github.com/louiss0/tree-sitter-mace"
-rev = "8ee8e86a06b90b3f4b05d764d7391d67d2d5c9ce"
+rev = "059cbfd617bc195e1e8bf288cfc18f862a6f2d7e"
 
 [language_servers.mace]
 name = "Mace LSP"
