@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="images/mace-icon.png" alt="Mace" width="256">
+</p>
+
 # Mace Zed Extension
 
 This extension provides Mace language support for Zed, including the grammar,
